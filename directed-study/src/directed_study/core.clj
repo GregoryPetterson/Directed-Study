@@ -19,22 +19,29 @@
 (= (* 5 5) 25)
 (= 6 (/ 30 5))
 
-(= (- 5 (* 2 3)) n); Exercise: replace n with an integer to make the expression evaluate to true.
+;(= (- 5 (* 2 3))___); Exercise: fill in the blank with an integer to make the expression evaluate to true.
 
 ;((2 * 3) - 3); Exercise: change this to prefix notation.
 
 ;;;;; def for variable
 
-;;;;;;; defn Function
-; Clojure is a functional language.
-; Meaning most of the code is built on functions that take an input and return an output.
-; Functions in Clojure operate same as mathematical functions.
-; They take an input and return an output.
-; A mathematical function like f(x)= x + 3 can be written in Clojure like this:
-(defn add-three [x] (+ x 3))
-; The “defn” is defining the function add-three that takes an input [x] and adds it to 3.
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; defining functions in racket is different
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; more practice
+;;;;;;; Defining a Function
+; Clojure is a functional language like Racket.
+; In a functional language most of the code is built on functions that take an input and return an output.
+
+; The syntax of defining a function in Clojure and Racket is slightly different.
+; Consider a function to add 3 to a number in Racket it looks like this:
+;;;;;;;; (define (add-three num)
+;;;;;;;; (+ 3 num))
+; In the first line, we define the function named add-three to take the variable num as input.
+; The expression in the next line takes whatever the varaible num is storing and adds 3 to it.
+
+; In Clojure it looks like this.
+(defn add-three [num]
+  (+ num 3))
+; In Clojure we use defn instead of define, the name of the function is add-three and it takes the the variable num as input.
+; The expression in this example is the same, 3 is added to whatever variable num is storing.
+
 
 ; Exercise: define a function called timesfour that multiplies an input x by four
 
@@ -71,7 +78,7 @@
 ;;;;;;; hashmap Collection
 (= 12 (:banana {:apple 1, :banana 12, :cat 34}))
 ; Exercise: replace n with an integer to make the expression evaluate to true.
-(= n (:apple {:apple 1, :banana 12, :cat 34}))
+(= 1 (:apple {:apple 1, :banana 12, :cat 34}))
 
 
 ;;;;;;; vector Collection
@@ -84,7 +91,7 @@
 ; Takes a collection and returns the first item in that collection.
 (= 1 (first [1 2 3]))
 ; Exercise: replace n with an integer to make the expression evaluate to true.
-(= n (first ["apple" "cat"]))
+(= "apple" (first ["apple" "cat"]))
 
 ;;;;;;;;;;; rest Function
 ; Takes a collection and returns a sequence of the elements after the first element.
@@ -94,7 +101,7 @@
 ; Example:
 (= [2 3]  (rest [1 2 3] ))
 ; Exercise: replace n with an integer to make the expression evaluate to true.
-(= n (rest ["apple" "cat"]))
+(= "cat" (rest ["apple" "cat"]))
 
 ;;;;;;;;;; conj Function
 ; Takes a collection and an element and returns a new collection with the
@@ -150,7 +157,7 @@
 (= (* 5 5) 25)
 (= 6 (/ 30 5))
 
-(= (- 5 (* 2 3)) n); Exercise: replace n with an integer to make the expression evaluate to true.
+(= (- 5 (* 2 3)) -1); Exercise: replace n with an integer to make the expression evaluate to true.
 
 ;((2 * 3) - 3); Exercise: change this to prefix notation.
 
@@ -202,7 +209,7 @@
 ;;;;;;; hashmap Collection
 (= 12 (:banana {:apple 1, :banana 12, :cat 34}))
 ; Exercise: replace n with an integer to make the expression evaluate to true.
-(= n (:apple {:apple 1, :banana 12, :cat 34}))
+(= 1 (:apple {:apple 1, :banana 12, :cat 34}))
 
 
 ;;;;;;; vector Collection
@@ -215,7 +222,7 @@
 ; Takes a collection and returns the first item in that collection.
 (= 1 (first [1 2 3]))
 ; Exercise: replace n with an integer to make the expression evaluate to true.
-(= n (first ["apple" "cat"]))
+(= "apple" (first ["apple" "cat"]))
 
 ;;;;;;;;;;; rest Function
 ; Takes a collection and returns a sequence of the elements after the first element.
@@ -225,7 +232,7 @@
 ; Example:
 (= [2 3]  (rest [1 2 3] ))
 ; Exercise: replace n with an integer to make the expression evaluate to true.
-(= n (rest ["apple" "cat"]))
+(=  (rest ["apple" "cat"]))
 
 ;;;;;;;;;; conj Function
 ; Takes a collection and an element and returns a new collection with the
@@ -280,4 +287,3 @@
 ;(defn suffix[list]
 ;  (if (empty? list)
 ; (conj list suffix[(rest list)]))
-
