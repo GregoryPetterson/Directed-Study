@@ -6,55 +6,76 @@
   [& args]
   (println "Hello, World!"))
 
-;;;;;;;;;;;;;;;;;; Level 1 - Basic syntax and defining a function
+;;;;;;;;;;;;;;;;;; Level 1 - Defining a Function and Syntax
 
-;;;;;;; -, +, <, >, *, /, and = Functions
-; In Clojure mathematical symbols like +, =, -,<, and > come before their arguments.
-; Unlike infix notation that is most commonly used, e.g. 2 + 3.
-; This is called prefix notation and it's the same notation used in Racket.
+; In 1301 you used a functional language called Racket. This usability test is designed to improve the
+; error messages of another functional language called Clojure.
+; Similarily to Racket, Clojure is built on functions that take an input and return an output.
+; Defining a simple function in Clojure is nearly identical.
 
-(= (+ 2 3) 5)
-(= (- 2 3) -1)
-(= true (> 5 3))
-(= (* 5 5) 25)
-(= 6 (/ 30 5))
-
-;(= (- 5 (* 2 3))___); Exercise: fill in the blank with an integer to make the expression evaluate to true.
-
-;((2 * 3) - 3); Exercise: change this to prefix notation.
-
-;;;;; def for variable
-
-;;;;;;; Defining a Function
-; Clojure is a functional language like Racket.
-; In a functional language most of the code is built on functions that take an input and return an output.
-
-; The syntax of defining a function in Clojure and Racket is slightly different.
-; Consider a function to add 3 to a number in Racket it looks like this:
+; Consider a function to add 3 to a number, in Racket it looks like this:
 ;;;;;;;; (define (add-three num)
 ;;;;;;;; (+ 3 num))
 ; In the first line, we define the function named add-three to take the variable num as input.
 ; The expression in the next line takes whatever the varaible num is storing and adds 3 to it.
+; Recall that Racket uses prefix notation for functions, meaning the + function comes before its inputs.
+; Unlike how it's regularily written, (3 + num).
 
-; In Clojure it looks like this.
-(defn add-three [num]
-  (+ num 3))
-; In Clojure we use defn instead of define, the name of the function is add-three and it takes the the variable num as input.
-; The expression in this example is the same, 3 is added to whatever variable num is storing.
+; In Clojure it's very similar:
+(defn add-three [num] ;We defn the function add-three to take the variable num as input. The variable is enclosed in brackets.
+  (+ 3 num)) ; The expression in this example is identical, 3 is added to whatever variable num is storing.
 
 
 ; Exercise: define a function called timesfour that multiplies an input x by four
 
+;;;;;;;;;;;;;;;;;; Level 2 - Vectors
+
+; Explain nil for when you look for something and ca't find it.
+
+;;;;;;;;;;;;;;;;;; Level 3 - Count
+
+;;;;;;;;;;;;;;;;;; Level 4 - If
+
+;;;;;;;;;;;;;;;;;; Level 5 - Loop and Recur
+
+;;;;;;;;;;;;;;;;;; Level 6 - Count Function
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; PATH 2 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Should I  try to incorporate Hash-maps and lazy seq?
+
+;;;;;;;;;;;;;;;;;; Level 1 - Defining a Function and Syntax
+
+; In 1301 you used a functional language called Racket. This usability test is designed to improve the
+; error messages of another functional language called Clojure.
+; Similarily to Racket, Clojure is built on functions that take an input and return an output.
+; Defining a simple function in Clojure is nearly identical.
+
+; Consider a function to add 3 to a number, in Racket it looks like this:
+;;;;;;;; (define (add-three num)
+;;;;;;;; (+ 3 num))
+; In the first line, we define the function named add-three to take the variable num as input.
+; The expression in the next line takes whatever the varaible num is storing and adds 3 to it.
+; Recall that Racket uses prefix notation for functions, meaning the + function comes before its inputs.
+; Unlike how it's regularily written, (3 + num).
+
+; In Clojure it's very similar:
+(defn add-three [num] ;We defn the function add-three to take the variable num as input. The variable is enclosed in brackets.
+  (+ 3 num)) ; The expression in this example is identical, 3 is added to whatever variable num is storing.
+
+
+
 ;;;;;;;; cond Statement
-; A cond statement is made up of pairs of test and expressions. If the test evaluates to true for the input.
-; It evaluates the expression and returns it's value.
-(defn pos-neg-else-zero [n]
+; Conditional statement is made up of pairs of tests and expressions.
+; A cond evaluates expressions and for the first expression that evaluates to true, it outputs whatever is to the right of that expression.
+; The function pos-neg-else-zero takes a num and outputs "negative", "positive", or "zero."
+(defn pos-neg-else-zero [num]
   (cond
-    (< n 0) "negative"
-    (> n 0) "positive"
+    (< num 0) "negative"
+    (> num 0) "positive"
     :else "zero"))
 
-; Write a function similar to pos-neg-else-zero that uses a cond. It returns an
+; Write a function that uses a cond differently. It takes a string as an input and returns
 
 ;;;;;;; if Statement
 ; An if statement evaluates an expression.
@@ -143,134 +164,13 @@
 
 ;;;;;;;;;;;;;;;;;;;;Level 4 - Higher order functions
 
-;;;;;;;;;; Let
-; Let takes;;;;;;;;;;;;;;;;;; Level 1 - Basic syntax and defining a function
+;;;;;;;;;; Loop Recur
+(defn LR-practice [])
 
-;;;;;;; -, +, <, >, *, /, and = Functions
-; In Clojure mathematical symbols like +, =, -,<, and > come before their arguments.
-; Unlike infix notation that is most commonly used, e.g. 2 + 3.
-; This is called prefix notation and it's the same notation used in Racket.
-
-(= (+ 2 3) 5)
-(= (- 2 3) -1)
-(= true (> 5 3))
-(= (* 5 5) 25)
-(= 6 (/ 30 5))
-
-(= (- 5 (* 2 3)) -1); Exercise: replace n with an integer to make the expression evaluate to true.
-
-;((2 * 3) - 3); Exercise: change this to prefix notation.
-
-;;;;; def for variable
-
-;;;;;;; defn Function
-; Clojure is a functional language.
-; Meaning most of the code is built on functions that take an input and return an output.
-; Functions in Clojure operate same as mathematical functions.
-; They take an input and return an output.
-; A mathematical function like f(x)= x + 3 can be written in Clojure like this:
-(defn add-three [x] (+ x 3))
-; The “defn” is defining the function add-three that takes an input [x] and adds it to 3.
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; defining functions in racket is different
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; more practice
-
-; Exercise: define a function called timesfour that multiplies an input x by four
-
-;;;;;;;; cond Statement
-; A cond statement is made up of pairs of test and expressions. If the test evaluates to true for the input.
-; It evaluates the expression and returns it's value.
-(defn pos-neg-else-zero [n]
-  (cond
-    (< n 0) "negative"
-    (> n 0) "positive"
-    :else "zero"))
-
-; Write a function similar to pos-neg-else-zero that uses a cond. It returns an
 
 ;;;;;;; if Statement
 ; An if statement evaluates an expression.
 ; If that expression evaluates to true
-
-
-;;;;;;;; count Function
-(=  5 (count "hello"))
-; Exercise: fill in the blank
-(=  11 (count "hello world"))
-
-;;;;;;;;;;;;;;;;; Level 2 - Collections and functions that take collections as an input
-; A hashmap (also called just "map") is a collection that maps keys to values.
-; They’re a way of associating a value with another value.
-; A key can be anything it typically starts with a colon.
-; For example :a, :7, :hello, and :h7 are all keys
-
-;;;; Explain nil
-; When you look for something in a collections and can't find it
-
-;;;;;;; hashmap Collection
-(= 12 (:banana {:apple 1, :banana 12, :cat 34}))
-; Exercise: replace n with an integer to make the expression evaluate to true.
-(= 1 (:apple {:apple 1, :banana 12, :cat 34}))
-
-
-;;;;;;; vector Collection
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Do we need to introduce lists and vectors?
-; Or just choose one and stick with it.
-
-
-
-;;;;;;;;;; first Function
-; Takes a collection and returns the first item in that collection.
-(= 1 (first [1 2 3]))
-; Exercise: replace n with an integer to make the expression evaluate to true.
-(= "apple" (first ["apple" "cat"]))
-
-;;;;;;;;;;; rest Function
-; Takes a collection and returns a sequence of the elements after the first element.
-
-;;;;;;;;;;; empty? Function
-; Takes a collection and returns true if it's empty and false if it's not empty.
-; Example:
-(= [2 3]  (rest [1 2 3] ))
-; Exercise: replace n with an integer to make the expression evaluate to true.
-(=  (rest ["apple" "cat"]))
-
-;;;;;;;;;; conj Function
-; Takes a collection and an element and returns a new collection with the
-; element inserted at the beginning or the end depending if its a vector or a
-; list.
-
-;;;;;;;;;;;;;;;;;;Level 3 - Writing more complex functions
-
-;;;;;;;;;; avoid when use if or cond instead
-; remove println
-
-;;;;;;; loop and recur problem
-(loop [x 10]
-  (when (> x 1)
-    (println x)
-    (recur (- x 2))))
-
-;;;;;;;; Recursion Problems
-; Write a function to return the last element in a vector
-
-(defn f[x]
-(if
-  (empty? (rest x))
-  (first x)
-  (f (rest x))))
-
-
-; Write a function to sum up all elements in a vector using, first, empty?, and rest
-(defn sum-vector [s]
-  (if (empty? s)
-    0
-    (+ (first s) (sum-vector (rest s)))))
-
-(defn sum-vector [s]
-  (loop [ls s, acc 0]
-    (if (empty? ls)
-      acc
-    (recur (rest ls) (+ acc (first ls))))))
 
 ;;;;;;;;;;;;;;;;;;;;Level 4 - Higher order functions
 
