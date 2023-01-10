@@ -1,4 +1,5 @@
 (ns directed-study.core
+  (:require [clojure.string :as str])
   (:gen-class))
 
 (defn -main
@@ -11,34 +12,143 @@
 ; In 1301 you used a functional language called Racket. This usability test is designed to improve the
 ; error messages of another functional language called Clojure.
 ; Similarily to Racket, Clojure is built on functions that take an input and return an output.
-; Defining a simple function in Clojure is nearly identical.
 
+; To write your own function in Clojure is nearly identical, you need to define it.
 ; Consider a function to add 3 to a number, in Racket it looks like this:
-;;;;;;;; (define (add-three num)
-;;;;;;;; (+ 3 num))
+;;;;;;;; (define (add-three x)
+;;;;;;;; (+ 3 x))
 ; In the first line, we define the function named add-three to take the variable num as input.
 ; The expression in the next line takes whatever the varaible num is storing and adds 3 to it.
 ; Recall that Racket uses prefix notation for functions, meaning the + function comes before its inputs.
-; Unlike how it's regularily written, (3 + num).
+; Unlike how it's normally in arithmetic, (3 + num).
 
 ; In Clojure it's very similar:
-(defn add-three [num] ;We defn the function add-three to take the variable num as input. The variable is enclosed in brackets.
-  (+ 3 num)) ; The expression in this example is identical, 3 is added to whatever variable num is storing.
+(defn add-three [x] ;We defn the function add-three to take the variable num as input. The variable is enclosed in brackets.
+  (+ 3 x)) ; The expression in this example is identical, 3 is added to whatever variable num is storing.
 
+; Fill in the blank:
+; (defn cheese? [string]
+; ( = "cheese" ______))
 
-; Exercise: define a function called timesfour that multiplies an input x by four
+; Exercise: define a function called times four that multiplies an input x by four
+
+; To define a global variable def is used.
+(def num 5)
+(def practice "practice")
+
+; That can be used to store a variable to call your times-four function on.
+
+;(times-four num)
+
 
 ;;;;;;;;;;;;;;;;;; Level 2 - Vectors
+; A vector is like a list in Racket. A vector can be concisely constructed like this:
+[1 2 3 4]
+[num practice]
 
-; Explain nil for when you look for something and ca't find it.
+(def cheese-vector ["gouda cheese" "pepperjack cheese" "parmesean cheese" "asiago cheese" "american cheese"])
 
-;;;;;;;;;;;;;;;;;; Level 3 - Count
+; nth is a predefined function that takes a vector and returns the nth value in the vector.
+; Fill in the blanks to return the 4th item in the vector.
 
-;;;;;;;;;;;;;;;;;; Level 4 - If
+;(nth ____ _____)
 
-;;;;;;;;;;;;;;;;;; Level 5 - Loop and Recur
+; If you five nth an index bigger than it's size it will return nil. Clojure's equivalent to null.
 
-;;;;;;;;;;;;;;;;;; Level 6 - Count Function
+;;;;;;;;;;;;;;;;;; Level 3 - If Statements
+; You're familiar with if statements from Racket. They're entirely identical in Clojure.
+
+; (if boolean-form
+;   then-form
+;   optional-else-form)
+
+
+
+;;;;;;;;;;;;;;;;;; Level 4 - Loop and Recur
+
+; Recursion is a method of solving a problem by solving smaller and smaller versions of the problem until
+; the base case is reached. The base case is when the problem is small enough problem to where it can be solved, then the solution to
+; that problem can be used to solve the next problem.
+
+
+; Definition:
+; Loop first binds given variables, evaluates whether the given argument is
+; true in relation to the given condition. If true, the given value goes through the recur argument and repeats the process. If false, the value is directed to the base statement.
+;
+; recur: directs the accumulated value to the loop
+; loop: sets a recursion point
+;
+; Syntax:
+; loop [binding]
+; (condition
+;    (statement)
+;    (recur (binding)))
+
+(defn countdown [n]
+  (loop [x 10]
+     (when (>= x 0)
+       x
+        (recur (- x 1)))))
+
+;;;;;;;;;;;;;;;;; Both are the same. How do I explain the point of recur.
+;;;;;;;;;;;;;;;;; If it's to guarantee that the JVM optimizes it.
+;;;;;;;;;;;;;;;; Note: if they try non-tail recursion with recur, a java exception is thrown.
+
+(defn  counting [x]
+  (when (>= x 0)
+  (println x)
+  (counting (- x 1))))
+
+(defn factorial [n]
+  (if (= n 1)
+      1
+      (* n (factorial (- n 1)))))
+
+; Note: This uses multi-arity. Will have to explain what's happening
+(defn factorial
+  ([n]; when only one argument is passed in
+    (factorial n 1))
+  ([n acc] ; when two arguments are passed in
+    (if  (= n 0)  acc
+    (recur (dec n) (* acc n)))))
+
+;;;;;;;;;;;;;;;;;; Level 5 - Putting it all together
+; You've learned the basics of defining functions. Vectors and a few predefined functions.
+; If statements. Written loop and recur functions. You have a foundation to try and solve a Problem
+; by writing your own function using all you've learned! Below is a vector containing the contents of a fridge represented by strings.
+; Your goal is to do a cheese audit. Write a function that takes a vector as input. Uses loop to bind variables you need. Use "include?"
+; to decide is a string has "cheese" it. If statements to decide if you should increment the cheese-count and recur or keep the same cheese-count and recur.
+
+(def cheese ["cheese" "sausage" "parmesean cheese"])
+(def cheeses ["cheese" "pepperjack cheese" "asiago cheese" "hotdog" "apple"])
+
+; Note: Start by asking the study subject to write the function from scratch.
+;; If they can't get it then they can get a version with fill in the blanks.
+
+(defn cheese-counter
+  ([vector]; when only one argument is passed in
+    (cheese-counter (dec (count vector)) 0 vector))
+  ([n cheese-count vector]; when two arguments are passed in
+    (if (< n 0) cheese-count
+      (if  (str/includes? (nth vector n) "cheese")
+       (recur (dec n) (inc cheese-count) vector)
+       (recur (dec n) cheese-count vector)
+            )
+        )
+   )
+)
+;;;;;;;;;;;;;; Same function but it uses loop instead of arity. Not sure which
+;;;;;;;;;;;;;; is more understandable for a beginner.
+; (defn cheese-counter [vector]
+;   (loop [n (dec (count vector)) cheese-count 0 v vector]
+;     (if (< n 0) cheese-count
+;       (if  (str/includes? (nth vector n) "cheese")
+;        (recur (dec n) (inc cheese-count) v)
+;        (recur (dec n) cheese-count v)
+;             )
+;         )
+;    )
+; )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; PATH 2 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -137,7 +247,7 @@
 ;;;;;;; loop and recur problem
 (loop [x 10]
   (when (> x 1)
-    (println x)
+    ;(println x)
     (recur (- x 2))))
 
 ;;;;;;;; Recursion Problems
