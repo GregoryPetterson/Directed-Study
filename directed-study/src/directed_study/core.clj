@@ -17,50 +17,59 @@
 ; Consider a function to add 3 to a number, in Racket it looks like this:
 ;;;;;;;; (define (add-three x)
 ;;;;;;;; (+ 3 x))
-; In the first line, we define the function named add-three to take the variable num as input.
-; The expression in the next line takes whatever the varaible num is storing and adds 3 to it.
+; In the first line, we define the function named add-three to take the variable x as input.
+; The expression in the next line takes whatever the varaible x is storing and adds 3 to it.
 ; Recall that Racket uses prefix notation for functions, meaning the + function comes before its inputs.
 ; Unlike how it's normally in arithmetic, (3 + num).
 
 ; In Clojure it's very similar:
-(defn add-three [x] ;We defn the function add-three to take the variable num as input. The variable is enclosed in brackets.
-  (+ 3 x)) ; The expression in this example is identical, 3 is added to whatever variable num is storing.
+(defn add-three [x] ;We defn the function add-three to take the variable x as input. The variable is enclosed in brackets.
+  (+ 3 x)) ; The expression in this example is identical, 3 is added to whatever variable x is storing.
 
-; Fill in the blank:
+; Problem 1: Fill in the Blank
 ; (defn cheese? [string]
 ; ( = "cheese" ______))
 
-; Exercise: define a function called times four that multiplies an input x by four
+; Problem 2: define a function called times-four that multiplies an input x by four
 
 ; To define a global variable def is used.
-(def num 5)
-(def practice "practice")
+(def num 5) ; You can call your times-four function on num like this:
+; (times-four num)
 
-; That can be used to store a variable to call your times-four function on.
-
-;(times-four num)
-
+; Problem 3: def a variable called variable to make this expression evaluate to true.
+; (= varaible 7)
 
 ;;;;;;;;;;;;;;;;;; Level 2 - Vectors
-; A vector is like a list in Racket. A vector can be concisely constructed like this:
-[1 2 3 4]
-[num practice]
+; A vector is like a list in Racket, it's used to stor things. A vector can be concisely constructed like this:
 
 (def cheese-vector ["gouda cheese" "pepperjack cheese" "parmesean cheese" "asiago cheese" "american cheese"])
 
-; nth is a predefined function that takes a vector and returns the nth value in the vector.
-; Fill in the blanks to return the 4th item in the vector.
+; nth is a function that takes a vector, an integer, and returns the nth value in the vector.
+; Fill in the blanks to return the 4th item of the cheese-vector.
+; Vectors are 0 indexed. 0 corresponds to "gouda cheese", 1 corresponds to "pepperjack cheese", 2 corresponds to "parmesean cheese"
 
 ;(nth ____ _____)
 
-; If you five nth an index bigger than it's size it will return nil. Clojure's equivalent to null.
+
 
 ;;;;;;;;;;;;;;;;;; Level 3 - If Statements
-; You're familiar with if statements from Racket. They're entirely identical in Clojure.
-
+; You're familiar with if statements from Racket. They're entirely identical in Clojure. This is the Syntax:
 ; (if boolean-form
 ;   then-form
 ;   optional-else-form)
+
+; This is a function that takes a number and returns the letter grade corresponding to that number.
+(defn grade [x]
+  (if (>= x 90) "A")
+  (if (>= x 80) "B")
+  (if (>= x 70) "C")
+  (if (>= x 60) "D")
+  (if (< x 60) "B")
+  )
+
+  (grade 82)
+
+; Write a function absolute-value. That takes a number and returns the absolute value of that number.
 
 
 
@@ -292,8 +301,4 @@
 
 
 ;;;;;;;;;;;; Suffix problem
-; Write a function that takes a list and returns every suffix of that list. Starting with the longest suffix and ending with the shortest suffix
-
-;(defn suffix[list]
-;  (if (empty? list)
-; (conj list suffix[(rest list)]))
+; Write a function that takes a string and recursively builds a list of all possible suffixes of the string.
