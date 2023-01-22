@@ -5,7 +5,7 @@
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
-  (println "Hello, World!"))
+)
 
 ;;;;;;;;;;;;;;;;;; Level 1 - Defining a Function and Syntax
 
@@ -15,15 +15,13 @@
 
 ; To write your own function in Clojure is nearly identical, you need to define it.
 ; Consider a function to add 3 to a number, in Racket it looks like this:
-;;;;;;;; (define (add-three x)
-;;;;;;;; (+ 3 x))
-; In the first line, we define the function named add-three to take the variable x as input.
-; The expression in the next line takes whatever the varaible x is storing and adds 3 to it.
+;;;;;;;; (define (add-three x) We define the function named add-three to take the variable x as input.
+;;;;;;;; (+ 3 x)) The expression in the next line takes whatever the variable x is storing and adds 3 to it.
 ; Recall that Racket uses prefix notation for functions, meaning the + function comes before its inputs.
 ; Unlike how it's normally in arithmetic, (3 + num).
 
 ; In Clojure it's very similar:
-(defn add-three [x] ;We defn the function add-three to take the variable x as input. The variable is enclosed in brackets.
+(defn add-three [x] ; We defn the function add-three to take the variable x as input. The variable is enclosed in brackets.
   (+ 3 x)) ; The expression in this example is identical, 3 is added to whatever variable x is storing.
 
 ; Problem 1: Fill in the Blank
@@ -33,57 +31,93 @@
 ; Problem 2: define a function called times-four that multiplies an input x by four
 
 ; To define a global variable def is used.
-(def num 5) ; You can call your times-four function on num like this:
-; (times-four num)
+(def number 5) ; You can call your times-four function on num like this:
+; (times-four number)
 
 ; Problem 3: def a variable called variable to make this expression evaluate to true.
-; (= varaible 7)
+; (= variable 7)
 
-;;;;;;;;;;;;;;;;;; Level 2 - Vectors
-; A vector is like a list in Racket, it's used to stor things. A vector can be concisely constructed like this:
-
-(def cheese-vector ["gouda cheese" "pepperjack cheese" "parmesean cheese" "asiago cheese" "american cheese"])
-
-; nth is a function that takes a vector, an integer, and returns the nth value in the vector.
-; Fill in the blanks to return the 4th item of the cheese-vector.
-; Vectors are 0 indexed. 0 corresponds to "gouda cheese", 1 corresponds to "pepperjack cheese", 2 corresponds to "parmesean cheese"
-
-;(nth ____ _____)
-
-
-
-;;;;;;;;;;;;;;;;;; Level 3 - If Statements
+;;;;;;;;;;;;;;;;;; Level 2 - If Statements
 ; You're familiar with if statements from Racket. They're entirely identical in Clojure. This is the Syntax:
 ; (if boolean-form
 ;   then-form
 ;   optional-else-form)
 
 ; This is a function that takes a number and returns the letter grade corresponding to that number.
-(defn grade [x]
-  (if (>= x 90) "A")
-  (if (>= x 80) "B")
-  (if (>= x 70) "C")
-  (if (>= x 60) "D")
-  (if (< x 60) "B")
-  )
+(defn if-pos-neg [num]
+  (if (>= num 0) "positive"
+    "negative")
 
-  (grade 82)
+;;;;;;;;;;;; Need to introduce when function at some point since it is used.
+
+
 
 ; Write a function absolute-value. That takes a number and returns the absolute value of that number.
 
+;;;;;;;;;;;;;;;;;; Level 3 - Vectors
+; A vector is like a list in Racket, it's used to store things. A vector can be concisely constructed like this:
 
+(def cheese-vector ["gouda cheese" "pepperjack cheese" "parmesean cheese" "asiago cheese" "american cheese"])
+
+; nth is a function that takes a vector, an integer, and returns the nth value in the vector.
+; Fill in the blanks to return the 4th item of the cheese-vector.
+; Vectors are 0 indexed 0 corresponds to "gouda cheese", 1 corresponds to "pepperjack cheese",
+; and 2 corresponds to "parmesean cheese"
+
+;(= "american cheese" (nth ____ _____))
+
+;;;;;;;;;; first Function
+; Takes a vector and returns the first item in that vector.
+(= 1 (first [1 2 3]))
+; Exercise: fill in the blank to make the expression evaluate to true.
+; (= _____ (first ["apple" "cat"]))
+
+;;;;;;;;;;; empty? Function
+; Takes a vector and returns true if it's empty and false if it's not empty.
+; Exercise: use the empty? function on these vectors
+(def empty-vector [])
+(def chz-vector ["cream cheese"])
+
+;;;;;;;;;;; rest Function
+; Takes a vector and returns a sequence of the elements after the first element.
+(= [2 3]  (rest [1 2 3] ))
+
+; Exercise: fill in the blank to make the expression evaluate to true.
+; (= "cat" (_____["apple" "cat"]))
+
+
+;;;;;;;; Recursion Problems
+; Recursion is a method of solving a problem by solving smaller and smaller versions of the problem until
+; the base case is reached. The base case is when the problem is small enough problem to where it can be solved, then the solution to
+; that problem can be used to solve the next problem. You used this concept to solve problems in Racket using
+; first, rest, and empty?. Those can be used similarily in Clojure.
+
+; Write a function to return the last element in a vector
+
+(defn f[x]
+(if
+  (empty? (rest x))
+  (first x)
+  (f (rest x))))
+
+
+; Write a function to sum up all elements in a vector using, first, empty?, and rest
+(defn sum-vector [s]
+  (if (empty? s)
+    0
+    (+ (first s) (sum-vector (rest s)))))
 
 ;;;;;;;;;;;;;;;;;; Level 4 - Loop and Recur
 
-; Recursion is a method of solving a problem by solving smaller and smaller versions of the problem until
-; the base case is reached. The base case is when the problem is small enough problem to where it can be solved, then the solution to
-; that problem can be used to solve the next problem.
+; Clojure has a recursive function Racket doesn't have called recur. Recur is usually used in conjunction with loop to bind values
+; for the recursion.
 
 
 ; Definition:
 ; Loop first binds given variables, evaluates whether the given argument is
-; true in relation to the given condition. If true, the given value goes through the recur argument and repeats the process. If false, the value is directed to the base statement.
-;
+; true in relation to the given condition. If true, the given value goes through the recur argument and repeats the process.
+; If false, the value is directed to the base statement.
+
 ; recur: directs the accumulated value to the loop
 ; loop: sets a recursion point
 ;
@@ -93,7 +127,7 @@
 ;    (statement)
 ;    (recur (binding)))
 
-(defn countdown [n]
+(defn countdown [x]
   (loop [x 10]
      (when (>= x 0)
        x
@@ -133,6 +167,7 @@
 
 ; Note: Start by asking the study subject to write the function from scratch.
 ;; If they can't get it then they can get a version with fill in the blanks.
+;;; Do we need a final example or just ask them to put it all together?
 
 (defn cheese-counter
   ([vector]; when only one argument is passed in
@@ -163,26 +198,7 @@
 
 ; Should I  try to incorporate Hash-maps and lazy seq?
 
-;;;;;;;;;;;;;;;;;; Level 1 - Defining a Function and Syntax
-
-; In 1301 you used a functional language called Racket. This usability test is designed to improve the
-; error messages of another functional language called Clojure.
-; Similarily to Racket, Clojure is built on functions that take an input and return an output.
-; Defining a simple function in Clojure is nearly identical.
-
-; Consider a function to add 3 to a number, in Racket it looks like this:
-;;;;;;;; (define (add-three num)
-;;;;;;;; (+ 3 num))
-; In the first line, we define the function named add-three to take the variable num as input.
-; The expression in the next line takes whatever the varaible num is storing and adds 3 to it.
-; Recall that Racket uses prefix notation for functions, meaning the + function comes before its inputs.
-; Unlike how it's regularily written, (3 + num).
-
-; In Clojure it's very similar:
-(defn add-three [num] ;We defn the function add-three to take the variable num as input. The variable is enclosed in brackets.
-  (+ 3 num)) ; The expression in this example is identical, 3 is added to whatever variable num is storing.
-
-
+;;;;;;;;;;;;;;;;;; Level 2 - Conditional Statements
 
 ;;;;;;;; cond Statement
 ; Conditional statement is made up of pairs of tests and expressions.
@@ -194,7 +210,17 @@
     (> num 0) "positive"
     :else "zero"))
 
-; Write a function that uses a cond differently. It takes a string as an input and returns
+; Exercise 4: Write a function that takes an integer as input and returns a string of corresponding to a letter grade.
+; Get these tests to pass:
+
+(= (grade 90) "A")
+(= (grade 89) "B")
+(= (grade 74) "C")
+(= (grade 60) "D")
+(= (grade 43) "F")
+
+
+
 
 ;;;;;;; if Statement
 ; An if statement evaluates an expression.
@@ -221,11 +247,6 @@
 (= 1 (:apple {:apple 1, :banana 12, :cat 34}))
 
 
-;;;;;;; vector Collection
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Do we need to introduce lists and vectors?
-; Or just choose one and stick with it.
-
-
 
 ;;;;;;;;;; first Function
 ; Takes a collection and returns the first item in that collection.
@@ -243,10 +264,7 @@
 ; Exercise: replace n with an integer to make the expression evaluate to true.
 (= "cat" (rest ["apple" "cat"]))
 
-;;;;;;;;;; conj Function
-; Takes a collection and an element and returns a new collection with the
-; element inserted at the beginning or the end depending if its a vector or a
-; list.
+
 
 ;;;;;;;;;;;;;;;;;;Level 3 - Writing more complex functions
 
@@ -281,15 +299,6 @@
       acc
     (recur (rest ls) (+ acc (first ls))))))
 
-;;;;;;;;;;;;;;;;;;;;Level 4 - Higher order functions
-
-;;;;;;;;;; Loop Recur
-(defn LR-practice [])
-
-
-;;;;;;; if Statement
-; An if statement evaluates an expression.
-; If that expression evaluates to true
 
 ;;;;;;;;;;;;;;;;;;;;Level 4 - Higher order functions
 
