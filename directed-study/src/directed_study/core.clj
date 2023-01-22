@@ -30,6 +30,8 @@
 
 ; Problem 2: define a function called times-four that multiplies an input x by four
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; More practice defn and multiple arguments
+
 ; To define a global variable def is used.
 (def number 5) ; You can call your times-four function on num like this:
 ; (times-four number)
@@ -37,7 +39,7 @@
 ; Problem 3: def a variable called variable to make this expression evaluate to true.
 ; (= variable 7)
 
-;;;;;;;;;;;;;;;;;; Level 2 - If Statements
+;;;;;;;;;;;;;;;;;; Level 2 - If Statements (Introduce cond as well)
 ; You're familiar with if statements from Racket. They're entirely identical in Clojure. This is the Syntax:
 ; (if boolean-form
 ;   then-form
@@ -46,7 +48,7 @@
 ; This is a function that takes a number and returns the letter grade corresponding to that number.
 (defn if-pos-neg [num]
   (if (>= num 0) "positive"
-    "negative")
+    "negative"))
 
 ;;;;;;;;;;;; Need to introduce when function at some point since it is used.
 
@@ -57,14 +59,7 @@
 ;;;;;;;;;;;;;;;;;; Level 3 - Vectors
 ; A vector is like a list in Racket, it's used to store things. A vector can be concisely constructed like this:
 
-(def cheese-vector ["gouda cheese" "pepperjack cheese" "parmesean cheese" "asiago cheese" "american cheese"])
 
-; nth is a function that takes a vector, an integer, and returns the nth value in the vector.
-; Fill in the blanks to return the 4th item of the cheese-vector.
-; Vectors are 0 indexed 0 corresponds to "gouda cheese", 1 corresponds to "pepperjack cheese",
-; and 2 corresponds to "parmesean cheese"
-
-;(= "american cheese" (nth ____ _____))
 
 ;;;;;;;;;; first Function
 ; Takes a vector and returns the first item in that vector.
@@ -80,17 +75,31 @@
 
 ;;;;;;;;;;; rest Function
 ; Takes a vector and returns a sequence of the elements after the first element.
-(= [2 3]  (rest [1 2 3] ))
+(println (= [2 3]  (rest [1 2 3] )))
 
 ; Exercise: fill in the blank to make the expression evaluate to true.
 ; (= "cat" (_____["apple" "cat"]))
 
+(def cheese-vector ["gouda cheese" "pepperjack cheese" "parmesean cheese" "asiago cheese" "american cheese"])
+
+; nth is a function that takes a vector, an integer, and returns the nth value in the vector.
+; Fill in the blanks to return the 4th item of the cheese-vector.
+; Vectors are 0 indexed 0 corresponds to "gouda cheese", 1 corresponds to "pepperjack cheese",
+; and 2 corresponds to "parmesean cheese"
+
+;(= "american cheese" (nth ____ _____))
 
 ;;;;;;;; Recursion Problems
 ; Recursion is a method of solving a problem by solving smaller and smaller versions of the problem until
 ; the base case is reached. The base case is when the problem is small enough problem to where it can be solved, then the solution to
 ; that problem can be used to solve the next problem. You used this concept to solve problems in Racket using
 ; first, rest, and empty?. Those can be used similarily in Clojure.
+
+; Write a function to sum up all elements in a vector using, first, empty?, and rest
+(defn sum-vector [s]
+  (if (empty? s)
+    0
+    (+ (first s) (sum-vector (rest s)))))
 
 ; Write a function to return the last element in a vector
 
@@ -101,11 +110,9 @@
   (f (rest x))))
 
 
-; Write a function to sum up all elements in a vector using, first, empty?, and rest
-(defn sum-vector [s]
-  (if (empty? s)
-    0
-    (+ (first s) (sum-vector (rest s)))))
+;;;;;;;;;; Conj
+;;;;;;;;;; Use odd? to count odd numbers in vector
+;;;;;;;;; Phrase functions as returning true if a vector contains something
 
 ;;;;;;;;;;;;;;;;;; Level 4 - Loop and Recur
 
@@ -129,9 +136,10 @@
 
 (defn countdown [x]
   (loop [x 10]
-     (when (>= x 0)
+     (when (>= x 0) ;;;;;;; Side effects try sum all elements in a vector or finding the smallest element
        x
         (recur (- x 1)))))
+        ;;;;; Probably don't need to introduce when.
 
 ;;;;;;;;;;;;;;;;; Both are the same. How do I explain the point of recur.
 ;;;;;;;;;;;;;;;;; If it's to guarantee that the JVM optimizes it.
@@ -147,6 +155,7 @@
       1
       (* n (factorial (- n 1)))))
 
+;;;;;;;;;;;;;;;;;;;;;; Don't necessarily need to put it in a function.
 ; Note: This uses multi-arity. Will have to explain what's happening
 (defn factorial
   ([n]; when only one argument is passed in
@@ -183,17 +192,18 @@
 )
 ;;;;;;;;;;;;;; Same function but it uses loop instead of arity. Not sure which
 ;;;;;;;;;;;;;; is more understandable for a beginner.
-; (defn cheese-counter [vector]
-;   (loop [n (dec (count vector)) cheese-count 0 v vector]
-;     (if (< n 0) cheese-count
-;       (if  (str/includes? (nth vector n) "cheese")
-;        (recur (dec n) (inc cheese-count) v)
-;        (recur (dec n) cheese-count v)
-;             )
-;         )
-;    )
-; )
+(defn cheese-counter [vector]
+  (loop [n (dec (count vector)) cheese-count 0 v vector]
+    (if (< n 0) cheese-count
+      (if  (str/includes? (nth vector n) "cheese")
+       (recur (dec n) (inc cheese-count) v)
+       (recur (dec n) cheese-count v)
+            )
+        )
+   ) ;;;;;; Index of first element that matches.
+)
 
+;;;;;;;;;;;;;;;;;;;;;; Put in markdown file. Examples in both. Just code in one file
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; PATH 2 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ; Should I  try to incorporate Hash-maps and lazy seq?
@@ -213,11 +223,11 @@
 ; Exercise 4: Write a function that takes an integer as input and returns a string of corresponding to a letter grade.
 ; Get these tests to pass:
 
-(= (grade 90) "A")
-(= (grade 89) "B")
-(= (grade 74) "C")
-(= (grade 60) "D")
-(= (grade 43) "F")
+; (= (grade 90) "A")
+; (= (grade 89) "B")
+; (= (grade 74) "C")
+; (= (grade 60) "D")
+; (= (grade 43) "F")
 
 
 
