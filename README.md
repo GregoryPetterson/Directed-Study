@@ -8,8 +8,8 @@ Similarily to Racket, Clojure is built on functions that take an input and retur
 
 To write your own function in Clojure is nearly identical, you need to define it.
 Consider a function to add 3 to a number, in Racket it looks like this:
-;;;;;;; (define (add-three x) We define the function named add-three to take the variable x as input.
-;;;;;;; (+ 3 x)) The expression in the next line takes whatever the variable x is storing and adds 3 to it.
+`(define (add-three x)` We define the function named add-three to take the variable x as input.
+`(+ 3 x))` The expression in the next line takes whatever the variable x is storing and adds 3 to it.
 Recall that Racket uses prefix notation for functions, meaning the + function comes before its inputs.
 Unlike how it's normally in arithmetic, (3 + num).
 
