@@ -68,46 +68,57 @@ Exercise: fill in the blank to make the expression evaluate to true.
 ```
 
 #### Comment!!!!!!! empty? Function
-; Takes a vector and returns true if it's empty and false if it's not empty.
-; Exercise: use the empty? function on these vectors
+Takes a vector and returns true if it's empty and false if it's not empty.
+Exercise: use the empty? function on these vectors
+```clojure
 (def empty-vector [])
 (def chz-vector ["cream cheese"])
+```
 
-;;;;;;;;;;; rest Function
-; Takes a vector and returns a sequence of the elements after the first element.
-(println (= [2 3]  (rest [1 2 3] )))
+#### rest Function
+Takes a vector and returns a sequence of the elements after the first element.
+```clojure
+(println (= [2 3]  (rest [1 2 3])))
+```
 
-; Exercise: fill in the blank to make the expression evaluate to true.
-; (= "cat" (_____["apple" "cat"]))
-
+Exercise: fill in the blank to make the expression evaluate to true.
+```clojure
+(= "cat" (_____["apple" "cat"]))
+```
+```clojure
 (def cheese-vector ["gouda cheese" "pepperjack cheese" "parmesean cheese" "asiago cheese" "american cheese"])
+```
+nth is a function that takes a vector, an integer, and returns the nth value in the vector.
+Fill in the blanks to return the 4th item of the cheese-vector.
+Vectors are 0 indexed 0 corresponds to "gouda cheese", 1 corresponds to "pepperjack cheese",
+and 2 corresponds to "parmesean cheese"
+```clojure
+(= "american cheese" (nth ____ _____))
+```
 
-; nth is a function that takes a vector, an integer, and returns the nth value in the vector.
-; Fill in the blanks to return the 4th item of the cheese-vector.
-; Vectors are 0 indexed 0 corresponds to "gouda cheese", 1 corresponds to "pepperjack cheese",
-; and 2 corresponds to "parmesean cheese"
+Recursion Problems
+Recursion is a method of solving a problem by solving smaller and smaller versions of the problem until
+the base case is reached. The base case is when the problem is small enough problem to where it can be solved, then the solution to
+that problem can be used to solve the next problem. You used this concept to solve problems in Racket using
+first, rest, and empty?. Those can be used similarily in Clojure.
 
-;(= "american cheese" (nth ____ _____))
-
-;;;;;;;; Recursion Problems
-; Recursion is a method of solving a problem by solving smaller and smaller versions of the problem until
-; the base case is reached. The base case is when the problem is small enough problem to where it can be solved, then the solution to
-; that problem can be used to solve the next problem. You used this concept to solve problems in Racket using
-; first, rest, and empty?. Those can be used similarily in Clojure.
-
-; Write a function to sum up all elements in a vector using, first, empty?, and rest
+Write a function to sum up all elements in a vector using, first, empty?, and rest
+```clojure
 (defn sum-vector [s]
   (if (empty? s)
     0
     (+ (first s) (sum-vector (rest s)))))
+```
 
-; Write a function to return the last element in a vector
+Write a function to return the last element in a vector
 
+```clojure
 (defn f[x]
 (if
   (empty? (rest x))
   (first x)
   (f (rest x))))
+```
 
 #### Comment!!!!!!!
 #### Conj
@@ -195,122 +206,4 @@ Do we need a final example or just ask them to put it all together?
    ) ;;;;;; Index of first element that matches.
 )
 ```
-
-;;;;;;;;;;;;;;;;;;;;; Put in markdown file. Examples in both. Just code in one file
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; PATH 2 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-; Should I  try to incorporate Hash-maps and lazy seq?
-
-;;;;;;;;;;;;;;;;;; Level 2 - Conditional Statements
-
-;;;;;;;; cond Statement
-; Conditional statement is made up of pairs of tests and expressions.
-; A cond evaluates expressions and for the first expression that evaluates to true, it outputs whatever is to the right of that expression.
-; The function pos-neg-else-zero takes a num and outputs "negative", "positive", or "zero."
-(defn pos-neg-else-zero [num]
-  (cond
-    (< num 0) "negative"
-    (> num 0) "positive"
-    :else "zero"))
-
-; Exercise 4: Write a function that takes an integer as input and returns a string of corresponding to a letter grade.
-; Get these tests to pass:
-
-; (= (grade 90) "A")
-; (= (grade 89) "B")
-; (= (grade 74) "C")
-; (= (grade 60) "D")
-; (= (grade 43) "F")
-
-
-
-
-;;;;;;; if Statement
-; An if statement evaluates an expression.
-; If that expression evaluates to true
-
-
-;;;;;;;; count Function
-(=  5 (count "hello"))
-; Exercise: fill in the blank
-(=  11 (count "hello world"))
-
-;;;;;;;;;;;;;;;;; Level 2 - Collections and functions that take collections as an input
-; A hashmap (also called just "map") is a collection that maps keys to values.
-; They’re a way of associating a value with another value.
-; A key can be anything it typically starts with a colon.
-; For example :a, :7, :hello, and :h7 are all keys
-
-;;;; Explain nil
-; When you look for something in a collections and can't find it
-
-;;;;;;; hashmap Collection
-(= 12 (:banana {:apple 1, :banana 12, :cat 34}))
-; Exercise: replace n with an integer to make the expression evaluate to true.
-(= 1 (:apple {:apple 1, :banana 12, :cat 34}))
-
-
-
-;;;;;;;;;; first Function
-; Takes a collection and returns the first item in that collection.
-(= 1 (first [1 2 3]))
-; Exercise: replace n with an integer to make the expression evaluate to true.
-(= "apple" (first ["apple" "cat"]))
-
-;;;;;;;;;;; rest Function
-; Takes a collection and returns a sequence of the elements after the first element.
-
-;;;;;;;;;;; empty? Function
-; Takes a collection and returns true if it's empty and false if it's not empty.
-; Example:
-(= [2 3]  (rest [1 2 3] ))
-; Exercise: replace n with an integer to make the expression evaluate to true.
-(= "cat" (rest ["apple" "cat"]))
-
-
-
-;;;;;;;;;;;;;;;;;;Level 3 - Writing more complex functions
-
-;;;;;;;;;; avoid when use if or cond instead
-; remove println
-
-;;;;;;; loop and recur problem
-(loop [x 10]
-  (when (> x 1)
-    ;(println x)
-    (recur (- x 2))))
-
-;;;;;;;; Recursion Problems
-; Write a function to return the last element in a vector
-
-(defn f[x]
-(if
-  (empty? (rest x))
-  (first x)
-  (f (rest x))))
-
-
-; Write a function to sum up all elements in a vector using, first, empty?, and rest
-(defn sum-vector [s]
-  (if (empty? s)
-    0
-    (+ (first s) (sum-vector (rest s)))))
-
-(defn sum-vector [s]
-  (loop [ls s, acc 0]
-    (if (empty? ls)
-      acc
-    (recur (rest ls) (+ acc (first ls))))))
-
-
-;;;;;;;;;;;;;;;;;;;;Level 4 - Higher order functions
-
-;;;;;;;;;; Let
-; Let takes a vector containing pairs and binds values to variables.
-;Examples:
-(let [x 0] x)
-(= 10 (let [x 5 y 5] (+ x y)))
-
-
-;;;;;;;;;;;; Suffix problem
-; Write a function that takes a string and recursively builds a list of all possible suffixes of the string.
+Put in markdown file. Examples in both. Just code in one file
