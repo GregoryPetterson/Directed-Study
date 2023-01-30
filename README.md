@@ -4,37 +4,48 @@
 
 In 1301 you used a functional language called Racket. This usability test is designed to improve the
 error messages of another functional language called Clojure.
-Similarily to Racket, Clojure is built on functions that take an input and return an output.
+Similarly to Racket, Clojure is built on functions that take an input and return an output.
 
-To write your own function in Clojure is nearly identical, you need to define it.
-Consider a function to add 3 to a number, in Racket it looks like this:
-`(define (add-three x)` We define the function named add-three to take the variable x as input.
-`(+ 3 x))` The expression in the next line takes whatever the variable x is storing and adds 3 to it.
+The syntax of defining a function in Clojure is slightly different than Racket.
+This is a simple function in Racket:
+```clojure
+(define (add-three x) ; We define the function named add-three to take the variable x as input.
+(+ 3 x)) ; The expression in the next line takes whatever the variable x is storing and adds 3 to it.
+```
 Recall that Racket uses prefix notation for functions, meaning the + function comes before its inputs.
 Unlike how a + is normally used in arithmetic, (3 + num).
 
-In Clojure it's very similar:
+The same function in Clojure:
 ```clojure
-(defn add-three [x] 
+(defn add-three [x]
   (+ 3 x))
 ```
-### Problem 1: Fill in the Blank
+Clojure uses prefix notation for all functions.
+```clojure
+(- 20 3) ; Prefix notation is used in simple math functions
+(count [21 4 90]) ; and for more interesting functions you'll learn about.
+```
+ To call the function add-three
+### Problem 1: Fill in the blank so when
+```clojure
 (defn cheese? [string]
 ( = "cheese" ______))
+```
 
-### Problem 2: define a function called times-four that multiplies an input x by four
+### problem 3 define a function called times-four that multiplies an input x by four
 
-#### Comment!!!!!!!!!!!!!!!!!! More practice defn and multiple arguments
+### Problem 4: define a function called greater-than-three that takes a number and returns true if it's bigger than three.
+
 
 To define a global variable def is used.
 ```clojure
-(def number 5) 
+(def number 5)
 (times-four number) ; This is how you call your times-four function on the variable you defined.
 ```
 
-### Problem 3: def a variable called variable to make this expression evaluate to true.
+### Problem 3: def a variable called var to make this expression evaluate to true.
 ```clojure
-(= variable 7)
+(= var 7)
 ```
 
 ## Level 2 - If Statements (Introduce cond as well)
