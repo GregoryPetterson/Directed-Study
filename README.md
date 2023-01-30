@@ -9,8 +9,8 @@ Similarly to Racket, Clojure is built on functions that take an input and return
 The syntax of defining a function in Clojure is slightly different than Racket.
 This is a simple function in Racket:
 ```clojure
-(define (add-three x) ; We define the function named add-three to take the variable x as input.
-(+ 3 x)) ; The expression in the next line takes whatever the variable x is storing and adds 3 to it.
+(define (add-three x) ; We define add-three to take x as input.
+(+ 3 x)) ; The expression adds 3 to x.
 ```
 Recall that Racket uses prefix notation for functions, meaning the + function comes before its inputs.
 Unlike how a + is normally used in arithmetic, (3 + num).
@@ -26,15 +26,17 @@ Clojure uses prefix notation for all functions.
 (count [21 4 90]) ; and for more interesting functions you'll learn about.
 ```
  To call the function add-three
-### Problem 1: Fill in the blank so when
+### Problem 1: Fill in the blank to get the test to evaluate to true.
 ```clojure
-(defn cheese? [string]
+(defn cheese? [str]
 ( = "cheese" ______))
+
+(cheese? "cheese")
 ```
 
-### problem 3 define a function called times-four that multiplies an input x by four
+### problem 2 define a function called times-four that multiplies an input x by four
 
-### Problem 4: define a function called greater-than-three that takes a number and returns true if it's bigger than three.
+### Problem 3: define a function called greater-than-three that takes a number and returns true if it's bigger than three.
 
 
 To define a global variable def is used.
