@@ -63,8 +63,6 @@ This is a function that takes a number and returns the letter grade correspondin
     "negative"))
 ```
 
-#### Comment!!!!!!!!!!!!! Need to introduce when function at some point since it is used.
-
 Write a function absolute-value. That takes a number and returns the absolute value of that number.
 
 ## Level 3 - Vectors
