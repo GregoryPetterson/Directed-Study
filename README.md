@@ -113,7 +113,7 @@ Recursion Problems
 Recursion is a method of solving a problem by solving smaller and smaller versions of the problem until
 the base case is reached. The base case is when the problem is small enough problem to where it can be solved, then the solution to
 that problem can be used to solve the next problem. You used this concept to solve problems in Racket using
-first, rest, and empty?. Those can be used similarily in Clojure.
+first, rest, and empty?. Those can be used similarly in Clojure.
 
 Write a function to sum up all elements in a vector using, first, empty?, and rest
 ```clojure
@@ -158,6 +158,8 @@ loop [binding]
     (statement)
     (recur (binding)))
 
+You've written a function to sum up all elements in a vector using first and rest. Now write a function to
+sum up all elements of a vector using loop andrecur
 ```clojure
 (defn countdown [x]
   (loop [x 10]
@@ -195,8 +197,8 @@ loop [binding]
 You've learned the basics of defining functions. Vectors and a few predefined functions.
 If statements. Written loop and recur functions. You have a foundation to try and solve a Problem
 by writing your own function using all you've learned! Below is a vector containing the contents of a fridge represented by strings.
-Your goal is to do a cheese audit. Write a function that takes a vector as input. Uses loop to bind variables you need. Use "include?"
-to decide is a string has "cheese" it. If statements to decide if you should increment the cheese-count and recur or keep the same cheese-count and recur.
+Your goal is to do a cheese audit. Write a function that takes that vector as input. Uses loop to bind variables you need. Use "include?"
+to decide is a string has "cheese" in it. If statements to decide if you should increment the cheese-count and recur or keep the same cheese-count and recur.
 
 ```clojure
 (def cheese ["cheese" "sausage" "parmesean cheese"])
@@ -207,16 +209,28 @@ Note: Start by asking the study subject to write the function from scratch.
 If they can't get it then they can get a version with fill in the blanks.
 Do we need a final example or just ask them to put it all together?
 
+Write a function that takes a vector of strings, some strings contain the substring "cheese" in them. Return the
+index of the first "cheese"
 ```clojure
-(defn cheese-counter [vector]
-  (loop [n (dec (count vector)) cheese-count 0 v vector]
-    (if (< n 0) cheese-count
-      (if  (str/includes? (nth vector n) "cheese")
-       (recur (dec n) (inc cheese-count) v)
-       (recur (dec n) cheese-count v)
-            )
-        )
-   ) ;;;;;; Index of first element that matches.
-)
+;;;;;; Index of first element that matches.
+
+(defn first-cheese-index [vector]
+  (loop [vector vector length (dec (count vector)) index 0]
+     (if (< index length)
+       (if (str))
+
+
+  ))
+
+; (defn cheese-counter [vector]
+;   (loop [n (dec (count vector)) cheese-count 0 v vector]
+;     (if (< n 0) cheese-count
+;       (if  (str/includes? (nth vector n) "cheese")
+;        (recur (dec n) (inc cheese-count) v)
+;        (recur (dec n) cheese-count v)
+;             )
+;         )
+;    )
+; )
 ```
 Put in markdown file. Examples in both. Just code in one file
