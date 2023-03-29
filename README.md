@@ -44,7 +44,7 @@ To define a global variable def is used.
 (def number 5)
 (times-four number) ; This is how you call your times-four function on the variable you defined.
 ```
-
+index-of
 ### Problem 3: def a variable called var to make this expression evaluate to true.
 ```clojure
 (= var 7)
@@ -159,7 +159,7 @@ loop [binding]
     (recur (binding)))
 
 You've written a function to sum up all elements in a vector using first and rest. Now write a function to
-sum up all elements of a vector using loop andrecur
+sum up all elements of a vector using loop and recur
 ```clojure
 (defn countdown [x]
   (loop [x 10]
@@ -181,16 +181,11 @@ sum up all elements of a vector using loop andrecur
       1
       (* n (factorial (- n 1)))))
 ```
-
-#### Don't necessarily need to put it in a function.
-; Note: This uses multi-arity. Will have to explain what's happening
-```clojure
-(defn factorial
-  ([n]; when only one argument is passed in
-    (factorial n 1))
-  ([n acc] ; when two arguments are passed in
-    (if  (= n 0)  acc
-    (recur (dec n) (* acc n)))))
+```
+(defn factorial [n]
+  (loop [n num 1 acc]
+    (if (= num 0)  acc
+    (recur (dec num) (* acc num)))))
 ```
 
 ## Level 5 - Putting it all together
